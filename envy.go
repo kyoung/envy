@@ -17,6 +17,12 @@ func getKeyValue(line []byte) (string, string, error) {
 	}
 	k := string(matches[1])
 	v := string(matches[2])
+
+	// remove wrapping quotes
+	if v[0] == '"' && v[len(v)-1] == '"' {
+		v = v[1 : len(v)-1]
+	}
+
 	return k, v, nil
 }
 

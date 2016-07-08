@@ -15,7 +15,7 @@ func TestParseRow(t *testing.T) {
 		{"this=that", "this", "that"},
 		{"oneNine123=3412", "oneNine123", "3412"},
 		{"FOO=BAR", "FOO", "BAR"},
-		{"dbconn=\"this=that one=two up=down\"", "dbconn", "\"this=that one=two up=down\""},
+		{"dbconn=\"this=that one=two up=down\"", "dbconn", "this=that one=two up=down"},
 	}
 	for _, exp := range expectations {
 		k, v, err := getKeyValue([]byte(exp.i))
