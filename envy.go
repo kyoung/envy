@@ -35,14 +35,14 @@ func loadEnvVars(envFilePath string) error {
 			return err
 		}
 		if err := os.Setenv(key, value); err != nil {
-			return err
+			return fmt.Errorf("Error setting pair %s:%s: %s", key, value, err)
 		}
 	}
 	return nil
 }
 
 func init() {
-	varRe = regexp.MustCompile(`(.*)=(.*)`)
+	varRe = regexp.MustCompile(`([^=]*)=(.*)`)
 }
 
 // Load will look for a .env file and attempt to load its variables as
@@ -50,10 +50,10 @@ func init() {
 func Load() error {
 	_, err := os.Stat(".env")
 	if err != nil {
-		return err
+		return fmt.Errorf("No .env file detected")
 	}
 	if err = loadEnvVars(".env"); err != nil {
-		return err
+		return fmt.Errorf("Error loading .env file: %s", err)
 	}
 	return nil
 }
@@ -63,7 +63,7 @@ func Load() error {
 func LoadFiles(filePaths []string) error {
 	for _, envFile := range filePaths {
 		if err := loadEnvVars(envFile); err != nil {
-			return err
+			return fmt.Errorf("Error load file %s: %s", envFile, err)
 		}
 	}
 	return nil
