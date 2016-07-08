@@ -31,3 +31,10 @@ the environment of your process.
 
 #### LoadFiles
 `envy.LoadFiles` takes a slice of filepaths, and will load each in turn.
+
+
+## That's Stupid... just user Bash/Docker/whatever...
+
+I know.
+
+Trust me, I had a use case.
